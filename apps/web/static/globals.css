@@ -1,0 +1,40 @@
+@font-face {
+  font-family: 'UnifrakturCook';
+  src: url('/UnifrakturCook-Bold.ttf');
+  font-weight: bold;
+}
+
+:root {
+  --sans-serif: 'Source Sans Pro', sans-serif;
+  --serif: 'Supermercado One', cursive;
+  --display: 'UnifrakturCook', cursive;
+  font-family: var(--sans-serif);
+}
+
+.sans-serif {
+  font-family: var(--sans-serif);
+}
+
+.serif {
+  font-family: var(--serif);
+}
+
+.display {
+  font-family: var(--display);
+}
+
+h1, h2, h3, h4 {
+  margin: 1rem 0 2rem;
+}
+
+h1 {
+  font-family: var(--display);
+  text-align: center;
+  font-size: 6rem;
+  line-height: .875;
+}
+
+h2 {
+  font-family: var(--serif);
+  font-size: 4rem;
+}
