@@ -7,17 +7,25 @@ export async function load({ params }) {
   const query = `*[_type == "artist"] {
     name,
     bands,
+    generatePage,
+    website,
     slug {
       current
     },
     heroImage {
       asset -> {  
-        url
+        url,
+        metadata {
+          dimensions
+        }
       }
     },
     thumbnailImage {
       asset -> {
-        url
+        url,
+        metadata {
+          dimensions
+        }
       }
     },
     isFeatured,

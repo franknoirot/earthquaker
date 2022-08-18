@@ -8,8 +8,27 @@
 
 <h1>Artists that dig us</h1>
 <section class="artist-grid">
-  {#each data.artists as artist, i (artist.name)}
+  {#each data.artists.filter(a => a.generatePage).sort((a, b) => (a.name < b.name) ? -1 : 1) as artist, i (artist.name)}
   <ArtistCard artist={artist} />
+  {/each}
+</section>
+<section class="name-grid">
+  {#each data.artists.filter(a => !a.generatePage).sort((a, b) => (a.name < b.name) ? -1 : 1) as artist, i (artist.name)}
+  {#if artist.website}
+  <a href={artist.website} target="_blank" class="name-wrapper">
+    <p class="name">{artist.name}</p>
+    {#if artist.bands}
+    <p>({artist.bands.join(' / ')})</p>
+    {/if}
+  </a>
+  {:else}
+  <div class='name-wrapper'>
+    <p class="name">{artist.name}</p>
+    {#if artist.bands}
+    <p>({artist.bands.join(' / ')})</p>
+    {/if}
+  </div>
+  {/if}
   {/each}
 </section>
 
@@ -19,7 +38,43 @@
     margin: auto;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 240px;
     gap: 2rem;
   }
 
+  .name-grid {
+    max-width: 1080px;
+    margin: 3rem auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .name-wrapper {
+    text-align: center;
+    display: block;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .name-wrapper p {
+    margin: .5rem 0;
+  }
+
+  .name {
+    font-weight: bold;
+  }
+
+
+  a .name {
+    color: goldenrod
+  }
+
+  a:focus .name,
+  a:hover .name {
+    color: darkgoldenrod;
+  }
 </style>

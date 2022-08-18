@@ -17,13 +17,15 @@
     <div class="block-content">
       {#each data.testimonials as testimonial, i (i)}
       <blockquote>{testimonial.quote}</blockquote>
+      {#if testimonial.speaker}
+      <p style="text-align: center; margin: 0;">—{testimonial.speaker}</p>
+      {/if}
       {/each}
     </div>
   </div>
 </section>
 <h2>Currently Using</h2>
 <DeviceGrid devices={data.devices} />
-<pre>{JSON.stringify(data, null, 2)}</pre>
 
 <style>
   .intro {
@@ -43,7 +45,8 @@
     margin: 4rem auto 2rem;
   }
   .intro h2 {
-    margin: 0;
+    font-size: 2rem;
+    margin-top: 2rem;
   }
 
   .intro div {
@@ -66,16 +69,21 @@
 
   .intro blockquote::before,
   .intro blockquote::after {
-    font-size: 2em;
-    line-height: 1em;
+    color: dodgerblue;
+    font-size: 3em;
+    line-height: 0em;
+    transform-origin: 0% 50%;
+    display: inline-block;
   }
   
   .intro blockquote::before {
     content: '“';
+    transform: rotate(-5deg) translateY(1rem);
   }
 
   .intro blockquote::after {
     content: '”';
+    transform: rotate(5deg) translateY(1rem);
   }
   
   h1 {

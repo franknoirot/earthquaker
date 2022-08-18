@@ -2,6 +2,7 @@
   import type { PageData } from './$types'
  // import BlockContent from '$lib/components/BlockContent/index.svelte'
   import ArtistCard from '$lib/components/ArtistCard.svelte'
+  import HighlightedHeading from '$lib/components/HighlightedHeading.svelte';
 
   export let data : PageData
 </script>

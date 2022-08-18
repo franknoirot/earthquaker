@@ -2,11 +2,29 @@ export const studio = {
   name: 'studio',
   title: 'Studio',
   type: 'document',
+  validation: Rule => [
+    Rule.custom(document => (document.generatePage && !document.slug)
+      ? 'Slug required if you want to generate a page' : true),
+    Rule.custom(document => (document.generatePage && !document.heroImage)
+      ? 'Hero Image required if you want to generate a page' : true),
+    Rule.custom(document => (document.generatePage && !(document.devices && document.devices.length))
+      ? 'Device list required if you want to generate a page' : true),
+    // Rule.custom(document => (document.generatePage && !(document.testimonials && document.testimonials.length))
+    //  ? 'At least one Testimonial required if you want to generate a page' : true),
+  ],
   fields: [
     {
       name: 'name',
       title: 'Name',
       type: 'string',
+      validation: Rule => Rule.required(),
+    },
+    {
+      name: 'generatePage',
+      title: 'Generate Studio Page?',
+      description: 'Is there enought content for this studio to get their own page?',
+      type: 'boolean',
+      initialValue: false,
       validation: Rule => Rule.required(),
     },
     {
@@ -16,18 +34,22 @@ export const studio = {
       options: {
         source: 'name',
       },
+    },
+    {
+      name: 'website',
+      title: 'Website URL',
+      type: 'url',
       validation: Rule => Rule.required(),
     },
     {
       name: 'location',
       title: 'Location',
       type: 'string',
-      validation: Rule => Rule.required(),
     },
     {
       name: 'heroImage',
       title: 'Hero Image',
-      description: "The larger main image that appears on the Artist's page.",
+      description: "The larger main image that appears on the Studio's page.",
       type: 'image',
     },
     {
@@ -88,18 +110,6 @@ export const studio = {
           to: [{ type: 'device' }],
         }
       ],
-      validation: Rule => Rule.required(),
     },
-    {
-      name: 'contact',
-      title: 'Contact',
-      type: 'array',
-      of: [
-        {type: 'string'},
-      ],
-      options: {
-        layout: 'tags',
-      },
-    }
   ],
 }

@@ -2,11 +2,29 @@ export const artist = {
   name: 'artist',
   title: 'Artist',
   type: 'document',
+  validation: Rule => [
+    Rule.custom(document => (document.generatePage && !document.slug)
+      ? 'Slug required if you want to generate a page' : true),
+    Rule.custom(document => (document.generatePage && !document.heroImage)
+      ? 'Hero Image required if you want to generate a page' : true),
+    Rule.custom(document => (document.generatePage && !(document.devices && document.devices.length))
+      ? 'Device list required if you want to generate a page' : true),
+    Rule.custom(document => (document.generatePage && !(document.testimonials && document.testimonials.length))
+      ? 'At least one Testimonial required if you want to generate a page' : true),
+  ],
   fields: [
     {
       name: 'name',
       title: 'Name',
       type: 'string',
+      validation: Rule => Rule.required(),
+    },
+    {
+      name: 'generatePage',
+      title: 'Generate Artist Page?',
+      description: 'Is there enought content for this artist to get their own page?',
+      type: 'boolean',
+      initialValue: false,
       validation: Rule => Rule.required(),
     },
     {
@@ -16,7 +34,6 @@ export const artist = {
       options: {
         source: 'name',
       },
-      validation: Rule => Rule.required(),
     },
     {
       name: 'bands',
@@ -39,7 +56,6 @@ export const artist = {
           type: 'string',
         }
       ],
-      validation: Rule => Rule.required(),
     },
     {
       name: 'isFeatured',
@@ -60,7 +76,6 @@ export const artist = {
       of: [
         { type: 'testimonial' }, 
       ],
-      validation: Rule => Rule.required(),
     },
     {
       name: 'devices',
@@ -76,7 +91,11 @@ export const artist = {
       options: {
         sortable: true,
       },
-      validation: Rule => Rule.required(),
+    },
+    {
+      name: 'website',
+      title: 'Website URL',
+      type: 'url',
     },
   ],
 }

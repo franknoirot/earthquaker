@@ -1,6 +1,8 @@
 export { artist } from './artist'
+export { audioSample } from './audioSample'
 export { author } from './author'
 export { blogPost } from './blogPost'
+export { companyInfo } from './companyInfo'
 export { dealer } from './dealer'
 export { device } from './device'
 export { studio } from './studio'

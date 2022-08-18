@@ -1,12 +1,15 @@
 <script lang="ts">
   export let artist
   export let linkPrefix = '/artists/'
+
+  const image = artist.thumbnailImage?.asset || artist.heroImage.asset
+  const orientation = image.metadata?.dimensions?.height > image.metadata?.dimensions?.width ? 'vertical' : 'horizontal'
 </script>
 
 
-<a href={linkPrefix + artist.slug.current} class="artist" style={`--bg: ${artist.colors.colorBackground.hex}; --fg: ${artist.colors.colorForeground.hex}`}>
+<a href={linkPrefix + artist.slug.current} class={"artist " + orientation} style={`--bg: ${artist.colors.colorBackground.hex}; --fg: ${artist.colors.colorForeground.hex}`}>
   <div class="wrapper">
-    <img src={artist.thumbnailImage?.asset?.url || artist.heroImage.asset.url} alt={artist.name} />
+    <img src={image.url} alt={artist.name} />
   </div>
   <div class="overlay">
     <h2>{artist.name}</h2>
@@ -24,7 +27,6 @@
     background: var(--bg);
     display: grid;
     position: relative;
-    place-items: center;
     box-sizing: border-box;
     padding: 4px;
     border-radius: 8px;
@@ -32,13 +34,20 @@
     overflow: hidden;
   }  
 
+  .artist.vertical {
+    grid-row: span 2;
+  }
+
   .wrapper {
     overflow: hidden;
+    position: relative;
     border-radius: 4px;
+    max-height: 100%;
   }
   
   .artist img {
-    max-width: 100%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     display: block;
   }

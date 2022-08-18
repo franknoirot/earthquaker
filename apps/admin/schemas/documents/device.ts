@@ -19,6 +19,18 @@ export const device = {
       validation: Rule => Rule.required(),
     },
     {
+      name: 'trademarkStatus',
+      title: 'Trademark Status',
+      type: 'string',
+      options: {
+        layout: 'dropdown',
+        list: [
+          { title: 'Trademark', value: '™' },
+          { title: 'Copyright', value: '®' },
+        ],
+      },
+    },
+    {
       name: 'subtitle',
       title: 'Subtitle',
       type: 'string',
@@ -27,6 +39,12 @@ export const device = {
     {
       name: 'mainImage',
       title: 'Main Image',
+      type: 'image',
+      validation: Rule => Rule.required(),
+    },
+    {
+      name: 'graphicImage',
+      title: 'Graphic Image',
       type: 'image',
       validation: Rule => Rule.required(),
     },
@@ -56,6 +74,20 @@ export const device = {
       of: [{
         type: 'block',
       }],
+      validation: Rule => Rule.required(),
+    },
+    {
+      name: 'videos',
+      title: 'Videos',
+      type: 'array',
+      of: [{ type: 'url' }],
+      validation: Rule => Rule.required(),
+    },
+    {
+      name: 'images',
+      title: 'Images',
+      type: 'array',
+      of: [{ type: 'image' }],
       validation: Rule => Rule.required(),
     },
   ]
