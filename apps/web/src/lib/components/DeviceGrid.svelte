@@ -3,11 +3,12 @@
   
   export let devices = []
   export let columns = 4
+  export let isNewToggled = false
 </script>
 
 <section class="device-grid" style={`--columns: ${columns};`}>
   {#each devices as device, i (device.title)}
-  <DeviceCard device={device} />
+  <DeviceCard device={device} {isNewToggled} />
   {/each}
 </section>
 

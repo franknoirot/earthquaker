@@ -1,10 +1,14 @@
 <script lang="ts">
   export let device
+  export let isNewToggled = false
 </script>
 
 
 <a href={'/devices/' + device.slug.current} class="device" style={`--bg: ${device.colorBackground.hex}; --fg: ${device.colorForeground.hex}`}>
   <img src={device.mainImage.asset.url} alt={device.title} />
+  {#if !isNewToggled && device.isNew}
+  <img src="/new-sticker.svg" alt="New device!" class="new-sticker" />
+  {/if}
   <div class="overlay">
     <h2>{device.title}</h2>
     <p>{device.subtitle}</p>
@@ -31,6 +35,15 @@
   .device img {
     max-width: 150px;
     display: block;
+  }
+
+  .new-sticker {
+    position: absolute;
+    width: 64px;
+    top: 15px;
+    left: 15px;
+    transform-origin: center;
+    transform: rotate(-15deg);
   }
 
   .overlay {

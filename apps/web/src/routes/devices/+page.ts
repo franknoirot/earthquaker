@@ -3,7 +3,7 @@ import { client } from '$lib/sanity'
 
 /** @type {import('./$types').PageLoad} */
 export async function load({ params }) {
-  const query = `*[_type == "device"] {
+  const query = `*[_type == "device"] | order(title asc) {
     title,
     subtitle,
     colorForeground,
@@ -13,6 +13,8 @@ export async function load({ params }) {
         url
       }
     },
+    isNew,
+    category,
     price,
     slug,
   }`
