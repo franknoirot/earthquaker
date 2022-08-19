@@ -14,7 +14,7 @@
   <div class="overlay">
     <h2>{artist.name}</h2>
     {#if artist.bands}
-    <p>{artist.bands}</p>
+    <p>{artist.bands.join(' / ')}</p>
     {/if}
   </div>
 </a>
@@ -59,22 +59,32 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: var(--fg);
-    color: var(--bg);
+    background-color: transparent;
+    color: white;
     border-radius: 4px;
     transform-origin: 50% 50%;
     transform: scale(.95);
     transition: all .08s ease-out;
+  }
+  
+  .overlay *:not(h2) {
     opacity: 0;
+    transition: opacity .08 ease-out;
   }
 
   .artist:focus .overlay,
   .artist:hover .overlay {
-    opacity: 1;
+    background-color: var(--bg);
     transform: none;
+    color: var(--fg);
   }
 
   .overlay h2 {
     font-size: 2rem;
+  }
+
+  .artist:focus .overlay *:not(h2),
+  .artist:hover .overlay *:not(h2) {
+    opacity: 1;
   }
 </style>
