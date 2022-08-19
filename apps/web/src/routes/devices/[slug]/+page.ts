@@ -11,6 +11,19 @@ export async function load({ params }) {
         url
       }
     },
+    "audioSamples": *[_type == "audioSample" && references(^._id)] {
+      ...,
+      audio {
+        asset -> {
+          mimeType,
+          url,
+        }
+      },
+      devices[] -> {
+        title,
+        slug,
+      }
+    }
   } [0]`
 
   const device = await client.fetch(query, { slug: params.slug })
