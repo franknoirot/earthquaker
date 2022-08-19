@@ -22,10 +22,10 @@ export const dealer = {
       initialValue: 'US',
       options: {
         list: [
-          'US',
-          'CA',
-          'UK',
-          'EU',
+          'United States',
+          'Canada',
+          'United Kingdom',
+          'European Union',
         ],
       },
       validation: Rule => Rule.required(),

@@ -30,7 +30,8 @@ export const audioSample = {
         list: [
           'Guitar',
           'Synth',
-          'Bass'
+          'Bass',
+          'Drum',
         ],
       },
       initialValue: 'Guitar',

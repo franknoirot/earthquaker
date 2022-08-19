@@ -26,9 +26,37 @@ export const device = {
         layout: 'dropdown',
         list: [
           { title: 'Trademark', value: '™' },
-          { title: 'Copyright', value: '®' },
+          { title: 'Registered', value: '®' },
         ],
       },
+    },
+    {
+      name: 'category',
+      title: 'Category',
+      type: 'string',
+      options: {
+        layout: 'dropdown',
+        list: [
+          'Boost, Preamp & EQ',
+          'Compression',
+          'Delay & Reverb',
+          'Distortion & Overdrive',
+          'Eurorack',
+          'Fuzz',
+          'Modulation & Filter',
+          'Octave & Pitch',
+          'Utility',
+          'Legacy',
+        ],
+      },
+      validation: Rule => Rule.required(),
+    },
+    {
+      name: 'isNew',
+      title: 'New Product',
+      type: 'boolean',
+      initialValue: true,
+      validation: Rule => Rule.required(),
     },
     {
       name: 'subtitle',
@@ -46,7 +74,6 @@ export const device = {
       name: 'graphicImage',
       title: 'Graphic Image',
       type: 'image',
-      validation: Rule => Rule.required(),
     },
     {
       name: 'colorForeground',
