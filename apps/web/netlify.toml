@@ -1,4 +1,11 @@
 [build]
   base = "apps/web/"
-  command = "pnpm run build"
+  command = "npm run build"
   publish = "build/"
+
+[build.environment]
+  NPM_FLAGS = "--prefix=/dev/null"
+  NODE_VERSION = "17.2.0"
+
+[functions]
+  node_bundler = "esbuild"

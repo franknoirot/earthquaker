@@ -2,6 +2,7 @@
 	"name": "web",
 	"version": "0.0.1",
 	"scripts": {
+		"prebuild": "test \"$CI\" = true && npx pnpm install -r --store=node_modules/.pnpm-store || echo skipping pnpm install",
 		"dev": "vite dev",
 		"build": "vite build",
 		"package": "svelte-kit package",
@@ -14,6 +15,8 @@
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.22.2",
+		"@portabletext/svelte": "^1.0.1",
+		"@sanity/client": "^3.3.3",
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/adapter-netlify": "1.0.0-next.71",
 		"@sveltejs/kit": "next",
@@ -31,9 +34,5 @@
 		"typescript": "^4.7.4",
 		"vite": "^3.0.0"
 	},
-	"type": "module",
-	"dependencies": {
-		"@portabletext/svelte": "^1.0.1",
-		"@sanity/client": "^3.3.3"
-	}
+	"type": "module"
 }
