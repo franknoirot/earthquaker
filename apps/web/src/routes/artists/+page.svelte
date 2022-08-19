@@ -9,7 +9,7 @@
 <h1>Artists that dig us</h1>
 <section class="artist-grid">
   {#each data.artists.filter(a => a.generatePage).sort((a, b) => (a.name < b.name) ? -1 : 1) as artist, i (artist.name)}
-  <ArtistCard artist={artist} />
+  <ArtistCard artist={artist} cardIndex={i} />
   {/each}
 </section>
 <section class="name-grid">

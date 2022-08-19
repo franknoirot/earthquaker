@@ -7,14 +7,14 @@
 
 <h1>Blog</h1>
 <section class="blog-grid">
-  {#each data as post, i (post.name)}
+  {#each data.blogPosts as post, i (post.name)}
   <a href={'/blog/' + post.slug.current} class="post-card">
     <div class='wrapper'>
-      <img src={post.heroImage.asset.url} />
+      <img src={post.heroImage.asset.url + `?w=960&fm=jpg`} loading={(i > 4) ? 'lazy' : 'eager'}/>
     </div>
     <div>
       <h2>{post.title}</h2>
-      <p>{post.plaintextContent.slice(0, 124)}</p>
+      <p>{post.teaserCopy}</p>
       <p class="cta">Read More →</p>
     </div>
   </a>

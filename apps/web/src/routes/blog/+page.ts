@@ -9,7 +9,7 @@ export async function load({ params }) {
     slug {
       current,
     },
-    "plaintextContent": pt::text(content),
+    teaserCopy,
     heroImage {
       asset -> {  
         url
@@ -18,7 +18,6 @@ export async function load({ params }) {
   }`
 
   const blogPosts = await client.fetch(query)
-  console.log({blogPosts})
 
-  return blogPosts 
+  return { blogPosts } 
 }

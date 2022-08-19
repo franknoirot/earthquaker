@@ -13,7 +13,7 @@
   }</style>`}
 </svelte:head>
 <section class="intro">
-  <img src={data.mainImage.asset.url} alt={data.title}>
+  <img src={data.mainImage.asset.url + `?fm=webp`} alt={data.title}>
   <div>
     <h1>{data.title}<small>{data.trademarkStatus || ''}</small></h1>
     <h2 class="serif">{data.subtitle}</h2>

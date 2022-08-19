@@ -8,7 +8,7 @@
 
 <section class="device-grid" style={`--columns: ${columns};`}>
   {#each devices as device, i (device.title)}
-  <DeviceCard device={device} {isNewToggled} />
+  <DeviceCard device={device} {isNewToggled} cardIndex={i} />
   {/each}
 </section>
 

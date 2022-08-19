@@ -10,7 +10,7 @@
   <title>{data.title} | EarthQuaker Blog</title>
 </svelte:head>
 <article>
-  <img src={data.heroImage.asset.url} alt={data.title}>
+  <img src={data.heroImage.asset.url + '?w=1260&fm=jpg'} alt={data.title} >
   <h1>{data.title}</h1>
   <div class="metadata">
     <p>Published {data.publishDate}</p>
@@ -23,7 +23,9 @@
 
 <style>
   article {
-    max-width: 80ch;
+    max-width: 96ch;
+    box-sizing: border-box;
+    padding: 0 1rem;
     margin-left: auto;
     margin-right: auto;
     font-size: 1.25rem;

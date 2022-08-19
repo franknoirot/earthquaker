@@ -1,11 +1,13 @@
 <script lang="ts">
   export let device
   export let isNewToggled = false
+  export let maxImgWidth : number = 400
+  export let cardIndex : number = 1
 </script>
 
 
 <a href={'/devices/' + device.slug.current} class="device" style={`--bg: ${device.colorBackground.hex}; --fg: ${device.colorForeground.hex}`}>
-  <img src={device.mainImage.asset.url} alt={device.title} />
+  <img src={device.mainImage.asset.url + `?w=${maxImgWidth}&fm=webp`} alt={device.title} loading={(cardIndex > 7) ? 'lazy' : 'eager'}/>
   {#if !isNewToggled && device.isNew}
   <img src="/new-sticker.svg" alt="New device!" class="new-sticker" />
   {/if}

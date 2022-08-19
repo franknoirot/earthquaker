@@ -1,6 +1,8 @@
 <script lang="ts">
   export let artist
   export let linkPrefix = '/artists/'
+  export let maxImgWidth : number = 600
+  export let cardIndex : number = 0
 
   const image = artist.thumbnailImage?.asset || artist.heroImage.asset
   const orientation = image.metadata?.dimensions?.height > image.metadata?.dimensions?.width ? 'vertical' : 'horizontal'
@@ -9,7 +11,7 @@
 
 <a href={linkPrefix + artist.slug.current} class={"artist " + orientation} style={`--bg: ${artist.colors.colorBackground.hex}; --fg: ${artist.colors.colorForeground.hex}`}>
   <div class="wrapper">
-    <img src={image.url} alt={artist.name} />
+    <img src={image.url + `?w=${maxImgWidth}&fm=jpg`} alt={artist.name} loading={(cardIndex > 7) ? 'lazy' : 'eager'}/>
   </div>
   <div class="overlay">
     <h2>{artist.name}</h2>
