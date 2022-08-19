@@ -113,13 +113,40 @@
     border-radius: 4px;
     border: 2px solid transparent;
     transition: all .08s ease-out;
+    position: relative;
+  }
+
+  a[target="_blank"]::after {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    right: 5%;
+    display: block;
+    width: 25px;
+    height: 25px;
+    background-color: var(--fg, gold);
+    -webkit-mask: url('/link-arrow.svg') no-repeat center;
+    mask: url('/link-arrow.svg') no-repeat center;
+    mask-size: contain;
+    -webkit-mask-size: contain;
+    transition: all .14s ease-out;
+    color: inherit;
+    transform: translate(-5px, 5px);
+    opacity: 0;
   }
 
   a[target="_blank"]:focus,
   a[target="_blank"]:hover {
     background: transparent;
     border-color: var(--fg, gold);
+    color: var(--fg, inherit);
     background: transparent;
+  }
+
+  a[target="_blank"]:focus::after,
+  a[target="_blank"]:hover::after {
+    opacity: 1;
+    transform: none;
   }
 
   a:focus,
