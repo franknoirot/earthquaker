@@ -4,7 +4,6 @@
   publish = "build/"
 
 [build.environment]
-  NPM_FLAGS = "--prefix=/dev/null"
   NODE_VERSION = "17.2.0"
 
 [functions]
