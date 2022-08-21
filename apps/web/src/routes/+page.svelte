@@ -55,6 +55,7 @@
     position: relative;
   }
 
+  /* this works because none of the grid item components have their height or width set */
   .grid-block > :global(*:first-child) {
     height: 100%;
     width: 100%;
@@ -69,7 +70,10 @@
     height: 80px;
   }
 
-  .audioSample > :global(*:first-child) {
+  /* this ":global(*:first-child)" selector is to override the styles of a specific grid item type.
+  however, you have to put an actual element like "div" in the select for it to really override.
+  I am unsure why, this should be plenty specific to override. */
+  .audioSample > :global(div:first-child) {
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -77,12 +81,12 @@
     border-radius: 8px;
   }
 
-  .blogPost > :global(*:first-child) {
+  .blogPost > :global(a:first-child) {
     border: solid 2px var(--fg, gold);
     display: block;
   }
 
-  .blogPost:hover > :global(*:first-child) {
+  .blogPost:hover > :global(a:first-child) {
     background: var(--fg, gold);
     color: var(--bg, black);
   }

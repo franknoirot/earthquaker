@@ -2,6 +2,8 @@
 import { error } from '@sveltejs/kit'
 import { client } from '$lib/sanity'
 
+export const prerender = false
+
 export const audioSampleFields = `
   ...,
   audio {
