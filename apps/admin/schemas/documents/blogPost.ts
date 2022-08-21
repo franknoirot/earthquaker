@@ -38,6 +38,12 @@ export const blogPost = {
       validation: Rule => Rule.required(),
     },
     {
+      name: 'teaserCopy',
+      title: 'Teaser Copy',
+      type: 'text',
+      validation: Rule => Rule.required(),
+    },
+    {
       name: 'content',
       title: 'Content',
       type: 'array',
