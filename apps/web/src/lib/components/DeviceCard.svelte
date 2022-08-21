@@ -1,5 +1,7 @@
 <script lang="ts">
-  export let device
+  import type { DeviceCard } from '$lib/sanity'
+
+  export let device : DeviceCard
   export let isNewToggled = false
   export let maxImgWidth : number = 400
   export let cardIndex : number = 1

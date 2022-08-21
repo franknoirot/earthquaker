@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { PageData } from './$types'
   import BlockContent from '$lib/components/BlockContent/index.svelte'
+  import AudioSampleCard from '$lib/components/AudioSampleCard.svelte'
 
   export let data : PageData
 </script>
@@ -9,7 +10,7 @@
   {@html `<style>body {
     --bg: ${data.colorBackground.hex};
     --fg: ${data.colorForeground.hex};
-    --dark-bg: ${(data.colorForeground.hsl.l > .5) ? 1 : 0}
+    --dark-bg: ${(data.colorForeground.hsl.l > .5) ? 1 : ''}
   }</style>`}
 </svelte:head>
 <section class="intro">
@@ -28,19 +29,7 @@
       <h2>Audio Samples</h2>
       <div class="audio-grid">
         {#each data.audioSamples as audioSample, i (audioSample._id)}
-        <div class="audio-card">
-          <p class="title">{audioSample.title}</p>
-          <audio controls src={audioSample.audio?.asset?.url}></audio>
-          <p>Played on a {audioSample.instrument}</p>
-          {#if audioSample.devices.length > 1}
-          <p>
-            with&nbsp;
-            {#each audioSample.devices.filter(d => d.title !== data.title) as device, j (device.title)}
-            <a href={'/devices/' + device.slug.current}>{device.title}</a>{(j < audioSample.devices.length - 2) ? ', ' : ' '}
-            {/each}
-          </p>
-          {/if}
-        </div>
+        <AudioSampleCard {audioSample} filterDeviceTitle={data.title}/>
         {/each}
       </div>
     </section>
@@ -123,7 +112,7 @@
   .video-grid,
   .audio-grid {
     display: grid;
-    --min-grid: 400px;
+    --min-grid: 300px;
     grid-template-columns: repeat(auto-fill, minmax(var(--min-grid), 1fr));
     gap: 2rem;
   }
@@ -132,36 +121,6 @@
     --min-grid: 240px;
   }
 
-  .audio-card {
-    margin: 0 1rem;
-    box-sizing: border-box;
-    padding: .5rem 1rem;
-    border-radius: 16px;
-    box-shadow: 0 4px 6px hsla(0deg, 0%, 0%, .14), 0 12px 24px hsla(0deg, 0%, 0%, .13);
-  }
-
-  .audio-card .title {
-    font-size: 1.25rem;
-  }
-  .audio-card p {
-    margin: .5rem 0;
-  }
-
-  .audio-card a {
-    color: inherit;
-    text-decoration: none;
-    display: inline-block;
-    padding: .25rem .75rem;
-    border-radius: 4px;
-    border: solid 1px;
-    transition: all .08s ease-out;
-  }
-  
-  .audio-card a:focus,
-  .audio-card a:hover {
-    background: var(--fg);
-    color: var(--bg);
-  }
 
   .video iframe {
     aspect-ratio: 16 / 9;

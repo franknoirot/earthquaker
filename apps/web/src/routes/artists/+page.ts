@@ -2,9 +2,7 @@
 import { error } from '@sveltejs/kit'
 import { client } from '$lib/sanity'
 
-/** @type {import('./$types').PageLoad} */
-export async function load({ params }) {
-  const query = `*[_type == "artist"] {
+export const artistFields = `
     name,
     bands,
     generatePage,
@@ -33,6 +31,12 @@ export async function load({ params }) {
       colorBackground,
       colorForeground
     }
+`
+
+/** @type {import('./$types').PageLoad} */
+export async function load({ params }) {
+  const query = `*[_type == "artist"] {
+    ${artistFields}
   }`
 
   const artists = await client.fetch(query)

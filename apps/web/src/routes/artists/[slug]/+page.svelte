@@ -10,7 +10,7 @@
   <title>{data.name} Uses Earthquaker Gear</title>
 </svelte:head>
 <section class="intro">
-  <img src={data.heroImage.asset.url} alt={data.title}>
+  <img src={data.heroImage.asset.url + '?w=1080&fm=webp&fit=max'} alt={data.title}>
   <div>
     <h1>{data.name}</h1>
     <h2 class="serif">Uses Earthquaker Gear {(data.bands) ? ' with ' + data.bands.slice(0,-1).join(', ') + ' and ' + data.bands.slice(-1) : ''}</h2>

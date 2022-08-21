@@ -9,6 +9,16 @@
   --serif: 'Supermercado One', cursive;
   --display: 'UnifrakturCook', cursive;
   font-family: var(--sans-serif);
+  --fg: black;
+  --bg: white;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fg: hsl(30deg, 3%, 50%);
+    --bg: hsl(300deg, 10%, 5%);
+    --dark-bg: 1;
+  }
 }
 
 .sans-serif {

@@ -1,7 +1,8 @@
-<script>
+<script lang="ts">
+  import type { DeviceCard as DeviceCardType } from '$lib/sanity'
   import DeviceCard from '$lib/components/DeviceCard.svelte'
   
-  export let devices = []
+  export let devices : DeviceCardType[] = []
   export let columns = 4
   export let isNewToggled = false
 </script>

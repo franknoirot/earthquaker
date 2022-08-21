@@ -1,32 +1,44 @@
 <script lang="ts">
   import type { PageData } from './$types'
+  import { page } from '$app/stores'
+  import { goto } from '$app/navigation'
   import DeviceGrid from '$lib/components/DeviceGrid.svelte'
 
   export let data : PageData
 
   const categories = data.devices.reduce((allCategories, device) => (allCategories.indexOf(device.category) < 0) ? [...allCategories, device.category] : allCategories, [])
     .sort((a, b) => (a[0] < b[0] && a !== "Legacy") ? -1 : 1)
-  let currentCategory = ''
-  let newOnly = false
+  let currentCategory = $page.url.searchParams.get('category')
+  let newOnly = $page.url.searchParams.has('new')  
   $: filteredDevices = data.devices.filter(device => (newOnly ? device.isNew : true)
     && (currentCategory ? device.category == currentCategory : device.category !== 'Legacy'))
+
+  function setParams() {
+    if (currentCategory) { $page.url.searchParams.set('category', currentCategory) }
+    else { $page.url.searchParams.delete('category') }
+    
+    if (newOnly) { $page.url.searchParams.set('new', true) }
+    else { $page.url.searchParams.delete('new') }
+
+    goto(`?${$page.url.searchParams.toString()}`)
+  }
 </script>
 
 <h1>Our Devices</h1>
 <div class="controls">
   <label class="new-toggle">
-    <input type="checkbox" bind:checked={newOnly} class="visually-hidden" />
+    <input type="checkbox" bind:checked={newOnly} on:change={setParams} class="visually-hidden" />
     <img src="/new-sticker.svg" alt="" />
     Toggle New devices
   </label>
   <fieldset name="category"  >
     <label class="category-radio">
-      <input type="radio" value="" bind:group={currentCategory} class="visually-hidden"/>
+      <input type="radio" value="" bind:group={currentCategory} on:change={setParams} class="visually-hidden"/>
       <span>All</span>
     </label>
     {#each categories as category, i (category)}
     <label class="category-radio">
-      <input type="radio" value={category} bind:group={currentCategory} class="visually-hidden"/>
+      <input type="radio" value={category} bind:group={currentCategory} on:change={setParams} class="visually-hidden"/>
       <span>{category}</span>
     </label>
     {/each}
