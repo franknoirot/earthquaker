@@ -1,21 +1,28 @@
 <script lang="ts">
   import type { PageData } from './$types'
+  import IntersectionObserver from 'svelte-intersection-observer'
   import BlockContent from '$lib/components/BlockContent/index.svelte'
   import AudioSampleCard from '$lib/components/AudioSampleCard.svelte'
 
   export let data : PageData
+  let element
+  let intersecting
 </script>
 
-<svelte:head>
-  {@html `<style>body {
-    --bg: ${data.colorBackground.hex};
-    --fg: ${data.colorForeground.hex};
-    --dark-bg: ${(data.colorForeground.hsl.l > .5) ? 1 : ''}
-  }</style>`}
-</svelte:head>
-<section class="intro">
-  <img src={data.mainImage.asset.url + `?fm=webp`} alt={data.title}>
-  <div>
+<svelte:options/>
+<IntersectionObserver {element} bind:this={intersecting} threshold={1}
+  on:observe={(e) => intersecting = e.detail.isIntersecting}
+>
+<section class="intro" >
+  <div class="img-wrapper">
+    <img src={data.mainImage.asset.url + `?fm=webp`} alt={data.title}>
+    {#each data.controls || [] as control, i (control._key)}
+    <div class={`control-marker desktop-only ${intersecting ? 'in-view' : ''}`} style={`--x: ${control.x}%; --y: ${control.y}%;`}>
+      <span class="visually-hidden">Control </span>{i + 1}
+    </div>
+    {/each}
+  </div>
+  <div class="right-column">
     <h1>{data.title}<small>{data.trademarkStatus || ''}</small></h1>
     <h2 class="serif">{data.subtitle}</h2>
     {#if data.category == "Legacy"}
@@ -34,7 +41,7 @@
       </div>
     </section>
     {/if}
-    {#if data.videos.length}
+    {#if data.videos?.length}
     <section class="video">
       <h2>Videos</h2>
       <div class="video-grid">
@@ -44,9 +51,29 @@
       </div>
     </section>
     {/if}
+    {#if data.controls?.length}
+    <section class="controls" bind:this={element}>
+      <div class="img-wrapper mobile-only">
+        <img src={data.mainImage.asset.url + `?fm=webp`} alt={data.title}>
+        {#each data.controls || [] as control, i (control._key)}
+        <div class="control-marker" style={`--x: ${control.x}%; --y: ${control.y}%;`}>
+          <span class="visually-hidden">Control </span>{i + 1}
+        </div>
+        {/each}
+      </div>
+      <h2>Controls</h2>
+      <ol class="block-content">
+        {#each data.controls as control, i (control._key)}
+        <li>
+          <BlockContent value={control.description} />
+        </li>
+        {/each}
+      </ol>
+    </section>
+    {/if}
   </div>
 </section>
-
+</IntersectionObserver>
 
 
 <style>
@@ -67,21 +94,61 @@
     gap: 2rem;
   }
 
-  .intro img {
-    top: 20px;
+  .img-wrapper {
+    top: 96px;
     position: sticky;
     justify-self: center;
     max-width: 400px;
+    height: fit-content;
   }
 
-  .intro h2 {
+  .img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: scale-down;
+  }
+
+  .right-column {
+    box-sizing: border-box;
+    padding: 0 1rem;
+  }
+
+  .control-marker {
+    opacity: 0;
+    position: absolute;
+    top: var(--y);
+    left: var(--x);
+    width: 2.5rem;
+    height: 2.5rem;
+    user-select: none;
+    font-size: 1.25rem;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100px;
+    background: white;
+    color: black;
+    font-weight: bold;
+    border: 3px solid var(--fg, gold);
+    transform: translateY(.5rem);
+  }
+
+  .mobile-only .control-marker,
+  .control-marker.in-view {
+    transition: all .1s ease-out;
+    opacity: 1;
+    transform: none;
+  }
+
+  h2 {
     margin: 0;
     text-align: center;
   }
 
   .intro div {
     box-sizing: border-box;
-    padding: 0 1rem;
   }
 
   .intro .legacy-product-notice {
@@ -125,5 +192,68 @@
   .video iframe {
     aspect-ratio: 16 / 9;
     width: 100%;
+  }
+
+  .controls li::marker {
+    font-size: 1.75rem;
+    padding: 0;
+    text-align: center;
+    display: inline-block;
+    border-radius: 200px;
+    border: solid 2px var(--fg, white);
+    background: var(--bg, black);
+    color: var(--fg, white);
+  }
+
+  @media screen and (max-width: 480px) {
+    section {
+      margin: 3rem 0;
+      padding: 0 .5rem;
+    }
+    h1 {
+      font-size: 3rem;
+    }
+
+    h2 {
+      font-size: 1.75rem;
+      margin: 1rem auto;
+    }
+
+    .right-column {
+      padding: 0;
+    }
+
+    .intro {
+      grid-template-columns: 1fr;
+      margin-top: 2rem;
+    }
+
+    .intro .block-content {
+      margin: 1.75rem auto;
+      font-size: 1rem;
+    }
+
+    .desktop-only {
+      display: none;
+    }
+
+    .mobile-only {
+      display: block;
+    }
+
+    .img-wrapper {
+      position: relative;
+      top: 0;
+      width: 100%;
+      height: 60vh;
+    }
+
+    .audio-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .video-grid {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 </style>
