@@ -71,7 +71,7 @@
   .dealer-grid {
     display: grid;
     padding: 0;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 2rem;
   }
 
@@ -123,5 +123,25 @@
     font-size: inherit;
     display: inline-block;
     border: solid 2px gold;
+  }
+
+  @media screen and (max-width: 480px) {
+    .dealer-grid {
+      gap: 1rem;
+    }
+
+    section {
+      box-sizing: border-box;
+      padding: 0 .5rem;
+    }
+
+    .dealer-cta {
+      display: block;
+      margin: .5rem;
+    }
+
+    .dealer-cta h2 {
+      font-size: 2rem;
+    }
   }
 </style>

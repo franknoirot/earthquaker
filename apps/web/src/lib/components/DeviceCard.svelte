@@ -41,11 +41,12 @@
     display: block;
   }
 
-  .new-sticker {
+  .device .new-sticker {
     position: absolute;
-    width: 64px;
-    top: 15px;
-    left: 15px;
+    width: 15vmin;
+    max-width: 64px;
+    top: 2%;
+    left: 5%;
     transform-origin: center;
     transform: rotate(-15deg);
   }

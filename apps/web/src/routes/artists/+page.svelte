@@ -37,8 +37,9 @@
     max-width: 1440px;
     margin: auto;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(calc(.2 * 1440px), 1fr));
     grid-auto-rows: 240px;
+    grid-auto-flow: dense;
     gap: 2rem;
   }
 
@@ -76,5 +77,25 @@
   a:focus .name,
   a:hover .name {
     color: darkgoldenrod;
+  }
+
+  @media screen and (max-width: 480px) {
+    .artist-grid {
+      gap: 1rem;
+
+    }
+
+    section {
+      box-sizing: border-box;
+      padding: 0 .5rem;
+    }
+
+    .artist-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .name-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 </style>

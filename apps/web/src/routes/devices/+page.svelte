@@ -8,7 +8,7 @@
 
   const categories = data.devices.reduce((allCategories, device) => (allCategories.indexOf(device.category) < 0) ? [...allCategories, device.category] : allCategories, [])
     .sort((a, b) => (a[0] < b[0] && a !== "Legacy") ? -1 : 1)
-  let currentCategory = $page.url.searchParams.get('category')
+  let currentCategory = $page.url.searchParams.get('category') || ''
   let newOnly = $page.url.searchParams.has('new')  
   $: filteredDevices = data.devices.filter(device => (newOnly ? device.isNew : true)
     && (currentCategory ? device.category == currentCategory : device.category !== 'Legacy'))
@@ -113,5 +113,20 @@
 
   .category-radio input:checked + span {
     background: gold;
+  }
+
+  @media screen and (max-width: 480px) {
+    .controls {
+      gap: 0;
+    }
+
+    fieldset {
+      justify-content: center;
+    }
+
+    .category-radio span {
+      font-size: .9rem;
+      margin: .125rem;
+    }
   }
 </style>

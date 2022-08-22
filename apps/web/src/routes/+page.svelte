@@ -9,6 +9,11 @@
   export let data : PageData
 </script>
 
+<svelte:head>
+  <title>EarthQuaker Devices | </title>
+  <meta name="og:description" content="Musical machines from the burning tire factories of Akron, OH" />
+</svelte:head>
+
 <h1>EarthQuaker Devices</h1>
 <section class="content-grid">
   {#each data.page.contentGrid as block, i (block._key)}
@@ -46,6 +51,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: 360px;
+    grid-auto-flow: dense;
     gap: 2rem;
   }
 
@@ -63,11 +69,11 @@
 
   .sticker {
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 5%;
+    left: 5%;
     transform: rotate(-15deg);
-    width: 80px;
-    height: 80px;
+    width: 10vmin;
+    height: 10vmin;
   }
 
   /* this ":global(*:first-child)" selector is to override the styles of a specific grid item type.
@@ -86,8 +92,26 @@
     display: block;
   }
 
+  .blogPost > :global(a:first-child img) {
+    max-width: 100%;
+  }
+
   .blogPost:hover > :global(a:first-child) {
     background: var(--fg, gold);
     color: var(--bg, black);
+  }
+
+  @media screen and (max-width: 480px) {
+    .content-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-auto-rows: auto;
+      gap: 1rem;
+    }
+
+    .grid-block {
+      --tilt: 0deg !important;
+    }
+
+    
   }
 </style>

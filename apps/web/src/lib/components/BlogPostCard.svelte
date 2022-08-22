@@ -49,4 +49,16 @@
     font-weight: bold;
   }
   
+  @media screen and (max-width: 480px) {
+    .post-card {
+      display: block;
+      margin: .5rem;
+      border: solid 2px var(--fg);
+    }
+
+    .post-card h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+  }
 </style>

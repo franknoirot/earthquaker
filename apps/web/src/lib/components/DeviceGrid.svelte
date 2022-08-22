@@ -21,4 +21,14 @@
     grid-template-columns: repeat(var(--columns), 1fr);
     gap: 2rem;
   }
+
+  @media screen and (max-width: 480px) {
+    .device-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      box-sizing: border-box;
+      padding: 0 .5rem;
+    }
+  }
+
 </style>
