@@ -11,6 +11,7 @@
   font-family: var(--sans-serif);
   --fg: black;
   --bg: white;
+  --dark-bg: 0;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -63,4 +64,19 @@ h3 {
   position: absolute;
   white-space: nowrap; 
   width: 1px;
+}
+
+audio {
+  max-width: 100%;
+}
+
+@media screen and (max-width: 480px) {
+  h1 {
+    font-size: 3.5rem;
+    margin-top: 2.75rem;
+  }
+
+  h2 {
+    font-size: 2.75rem;
+  }
 }
