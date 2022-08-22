@@ -69,11 +69,11 @@
 
   .sticker {
     position: absolute;
-    top: 5%;
-    left: 5%;
+    top: 10px;
+    left: 10px;
     transform: rotate(-15deg);
-    width: 10vmin;
-    height: 10vmin;
+    width: 8vmin;
+    height: 8vmin;
   }
 
   /* this ":global(*:first-child)" selector is to override the styles of a specific grid item type.
@@ -114,6 +114,18 @@
 
     .blogPost > :global(a:first-child) {
       margin: 0;
+    }
+
+    .sticker {
+      width: 40px;
+      height: 40px;
+    }
+
+    .audioSample .sticker {
+      top: -10px;
+      right: -10px;
+      left: initial;
+      transform: rotate(15deg);
     }
   }
 </style>
