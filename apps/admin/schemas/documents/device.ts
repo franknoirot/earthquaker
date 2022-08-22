@@ -111,6 +111,39 @@ export const device = {
       validation: Rule => Rule.required(),
     },
     {
+      name: 'controls',
+      title: 'Controls',
+      type: 'array',
+      of: [{
+        type: 'object',
+        title: 'Control',
+        fields: [
+          {
+            name: 'x',
+            title: 'X Position',
+            description: 'Left-to-right position on device photo as a percentage.',
+            type: 'number',
+            validation: Rule => Rule.required().max(100).min(0),
+          },
+          {
+            name: 'y',
+            title: 'Y Position',
+            description: 'Top-to-bottom position on device photo as a percentage.',
+            type: 'number',
+            validation: Rule => Rule.required().max(100).min(0),
+          },
+          {
+            name: 'description',
+            title: 'Description',
+            type: 'array',
+            of: [{ type: 'block' }],
+            validation: Rule => Rule.required(),
+          },
+        ],
+      }],
+      validation: Rule => Rule.required(),
+    },
+    {
       name: 'images',
       title: 'Images',
       type: 'array',
