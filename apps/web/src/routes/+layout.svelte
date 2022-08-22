@@ -8,7 +8,7 @@
 </script>
 
 
-<div style={`
+<div class='bg-wrap' style={`
     --bg: ${$page.data?.colorBackground?.hex || 'white'};
     --fg: ${$page.data?.colorForeground?.hex || 'black'};
     --dark-bg: ${($page.data?.colorForeground && $page.data.colorForeground.hsl.l > .5) ? 1 : 0}

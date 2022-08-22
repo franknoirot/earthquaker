@@ -89,4 +89,10 @@
   .artist:hover .overlay *:not(h2) {
     opacity: 1;
   }
+
+  @media screen and (max-width: 480px) {
+    .artist.vertical {
+      grid-row: span 1;
+    }
+  }
 </style>

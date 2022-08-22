@@ -180,24 +180,38 @@
     }
 
     ul {
-      display: none;
-    } 
-
-    .navToggled ul {
       display: flex;
       position: fixed;
-      inset: 0;
-      border-radius: 16px;
+      inset: 8px;
+      border-radius: 8px;
       background: var(--fg);
       color: var(--bg);
       flex-direction: column;
       justify-content: space-around;
       z-index: 5;
-      transform: translateZ(100px);
+      transform-origin: center;
+      transform: translateZ(100px) scale(.95);
       padding: 3rem 0;
       margin: 0;
       font-size: 1.5rem;
       box-sizing: border-box;
+      opacity: 0;
+      pointer-events: none;
+      transition: all .08s ease-out;
+    }
+
+    .navToggled ul {
+      transform: translateZ(100px) scale(1);
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .navToggled::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 2;
     }
 
     .navToggled a[target="_blank"] {

@@ -112,6 +112,8 @@
       --tilt: 0deg !important;
     }
 
-    
+    .blogPost > :global(a:first-child) {
+      margin: 0;
+    }
   }
 </style>
