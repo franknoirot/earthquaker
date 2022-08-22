@@ -11,3 +11,9 @@
     <pre>{JSON.stringify(data, null, 2)}</pre>
   </details>
 </summary>
+
+<style>
+  details {
+    overflow-x: auto;
+  }
+</style>
