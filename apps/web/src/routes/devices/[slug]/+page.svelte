@@ -77,6 +77,10 @@
 
 
 <style>
+  .mobile-only {
+    display: none;
+  }
+
   section {
     margin: 6rem auto;
     max-width: 1800px;
